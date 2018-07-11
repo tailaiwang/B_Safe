@@ -1,5 +1,5 @@
 # B Safe
-### Blue house project at SHAD MUN (Memorial University of Newfoundland). July 1st - 23rd, 2018. 
+## Blue house project at SHAD MUN (Memorial University of Newfoundland). July 1st - 23rd, 2018. 
 ### Topic: How can Canadians become more resilient against Natural Disasters? 
 ##### "SHAD is an award-winning enrichment and entrepreneurship program and network that empowers exceptional high school students – at a pivotal point in their education – to recognize their own capabilities and envision their extraordinary potential as tomorrow’s leaders and change makers." (shad.ca) 
 Team members:  
