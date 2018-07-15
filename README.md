@@ -1,4 +1,4 @@
-# B Safe
+# B-Safe
 ## House Project, SHAD MUN. 07/01/2018 - 07/23/2018
 ##### MUN - Memorial University of Newfoundland
 ### Topic: How can Canadians become more resilient against Natural Disasters? 
@@ -13,6 +13,6 @@ Faith Lum (Research President and VP Marketing) <br />
 Carly Black (Human Resources President and VP Communications) <br />
 Christine Kilpatrick (Research and Marketing Strategy Coordinator) <br />
 
-B Safe is an app developped by B-House Design, to help Canadians become more resilient against Natural Disasters. We see that many Canadians are undereducated about Natural Disasters, and at the same time many people find it difficult to think logically during times of high stress. B Safe will solve both these problems by providing users with a friendly User Interface that will walk them through customizable natural disaster guides. The user will be faced with voice prompts, simple instructions, and images that will assist them through the entire survival process. The version available on this repository is a proptotype. The project was coded entirely from scratch utilizing Python 3.6 with the Pygame and TKinter extensions. The app will hopefully eventually be available on Android via Java Web App, and on iOS. 
+B-Safe is an app developped by B-House Design, to help Canadians become more resilient against Natural Disasters. We see that many Canadians are undereducated about Natural Disasters, and at the same time many people find it difficult to think logically during times of high stress. B-Safe will solve both these problems by providing users with a friendly User Interface that will walk them through customizable natural disaster guides. The user will be faced with voice prompts, simple instructions, and images that will assist them through the entire survival process. The version available on this repository is a proptotype. The project was coded entirely from scratch utilizing Python 3.6 with the Pygame and TKinter extensions. The app will hopefully eventually be available on Android via Java Web App, and on iOS. 
 
 All visuals were made by hand via Google Drawings and Adobe Photoshop. Any infringement of intellectual property is purely accidental, so please inform us to be given credit or request resource removal. 
