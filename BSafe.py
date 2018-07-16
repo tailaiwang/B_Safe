@@ -45,6 +45,12 @@ def drawDisasters():
     screen.blit(disasterText, (screenWidth/2 - disasterText.get_width()/2, 0))
     draw.rect(screen, BLACK, backRect, 2)
     screen.blit(backPic, (backRect[0], backRect[1]))
+    screen.blit(wildfire, (disasterRects[0][0] + 2, disasterRects[0][1] + 2))
+    screen.blit(storm, (disasterRects[1][0] + 2 , disasterRects[1][1] + 2))
+    screen.blit(landslide, (disasterRects[2][0] + 2 , disasterRects[2][1] + 2))
+    screen.blit(flood, (disasterRects[3][0] + 2 , disasterRects[3][1] + 2))
+    screen.blit(avalanche, (disasterRects[4][0] + 2 , disasterRects[4][1] + 2))
+    screen.blit(hurricane, (disasterRects[5][0] + 2 , disasterRects[5][1] + 2))
 
 def drawFire():
     draw.rect(screen, BLACK, backRect, 2)
@@ -106,6 +112,19 @@ startText2 = ralewayRegular48.render("Start", True, BLACK)
 backRect = Rect(0,screenHeight - 100, screenWidth/4, 100)
 backPic = image.load("images/back.png")
 backPic = transform.scale(backPic, (int(screenWidth/4), 100))
+###################################################################
+flood = image.load("images/flood.png")
+flood = transform.scale(flood, (118,118))
+avalanche = image.load("images/avalanche.png")
+avalanche = transform.scale(avalanche, (118,118))
+wildfire = image.load("images/wildfire.png")
+wildfire = transform.scale(wildfire, (118,118))
+landslide = image.load("images/landslide.jpg")
+landslide = transform.scale(landslide, (118,118))
+hurricane = image.load("images/hurricane.png")
+hurricane = transform.scale(hurricane, (118,118))
+storm = image.load("images/storm.png")
+storm = transform.scale(storm, (118,118))
 #-------------------------------------------------------------------
 disasterRects = []
 xCount = 0
