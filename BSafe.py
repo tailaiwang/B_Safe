@@ -1,6 +1,11 @@
-#URGENT
-#FILE I/O WITH TXT FILES
-
+#*********URGENT**********
+#-------------------------
+#FILE I/O WITH TXT FILES |
+#POSSIBLE UI TYPING???   |
+#SEARCH FUNCTIONS        |
+#SETTINGS MENU           |
+#ALERT MENU              |
+#-------------------------
 #B Safe
 #B House Design
 #Engineering Team
@@ -23,7 +28,8 @@ pygame.mixer.pre_init(22050,-16,2,2048) #sound
 root = tk.Tk() #tkinter
 root.withdraw()
 
-#-------------------------------------------------------------------
+#######################################################################
+#ALL FUNCTIONS 
 def screenFill(c): #Where c is a color
     draw.rect(screen,(c), (0,0,screenWidth,screenHeight))
 
@@ -112,34 +118,39 @@ def drawHurricane():
         screen.blit(temp, (0,200 + count*20))
         count += 1
 #-------------------------------------------------------------------
-logo = image.load("images/logo.jpg")
-infile = open("setup.txt")
-hoes = infile.readline()
-print(hoes)
-infile.close()
+
 ####################################################################
+#DATA HANDLING I/O
 wildfireFile = open("data/wildfire.txt")
 wildfireData = wildfireFile.readlines()
+wildfireData.append("ADD NEW")
 wildfireFile.close()
 stormFile = open("data/storm.txt")
 stormData = stormFile.readlines()
+stormData.append("ADD NEW")
 stormFile.close()
 earthquakeFile = open("data/earthquake.txt")
 earthquakeData = earthquakeFile.readlines()
+earthquakeData.append("ADD NEW")
 earthquakeFile.close()
 floodFile = open("data/flood.txt")
 floodData = floodFile.readlines()
+floodData.append("ADD NEW")
 floodFile.close()
 avalancheFile = open("data/avalanche.txt")
 avalancheData = avalancheFile.readlines()
+avalancheData.append("ADD NEW")
 avalancheFile.close()
 hurricaneFile = open("data/hurricane.txt")
 hurricaneData = hurricaneFile.readlines()
+hurricaneData.append("ADD NEW")
 hurricaneFile.close()
 
 
-
+#-------------------------------------------------------------------
+#ORGANIZING DATA RECTS
 ####################################################################
+#SCREEN STUFF AND CONSTANTS
 screenWidth = 640
 screenHeight = 640
 BLACK = (0,0,0)
@@ -148,6 +159,13 @@ RED = (255,0,0)
 GREY = (111,111,111)
 screen = display.set_mode((screenWidth,screenHeight))#screen size (16:9 iOS ratios)
 #####################################################################
+#LAUCH SEQUENCE ITEMS
+logo = image.load("images/logo.jpg")
+infile = open("setup.txt")
+hoes = infile.readline()
+print(hoes) #Checks which launch sequence to go through
+infile.close()
+
 screenFill(WHITE)
 screen.blit(logo,(screenWidth/2 - logo.get_width()/2,screenHeight/2 - logo.get_height()/2))
 display.flip()
@@ -156,6 +174,7 @@ running = True
 screenPosition = "start"
 time.wait(1000)
 #####################################################################
+#FONTS
 font.init()
 ralewayBold60 = font.Font("raleway/Raleway-Bold.ttf",60)
 ralewayRegular48 = font.Font("raleway/Raleway-Regular.ttf", 48)
@@ -164,6 +183,7 @@ ralewayRegular24 = font.Font("raleway/Raleway-Regular.ttf", 24)
 testText =ralewayBold60.render("B-Safe", True, BLACK)
 testTextX,testTextY = ralewayBold60.size("B-Safe")
 ####################################################################
+#MENU RESOURCES AND RECTANGLES
 setupRect = Rect(screenWidth/2 - 100, screenHeight/2, 200, 50)
 setupText = ralewayRegular48.render("Setup", True, BLACK)
 startText = ralewayMedium36.render("The Natural Disaster Survival App", True, GREY)
@@ -172,6 +192,7 @@ backRect = Rect(0,screenHeight - 100, screenWidth/4, 100)
 backPic = image.load("images/back.png")
 backPic = transform.scale(backPic, (int(screenWidth/4), 100))
 ###################################################################
+#MENU ICONS AND TEXT
 flood = image.load("images/flood.png")
 flood = transform.scale(flood, (118,118))
 floodText = ralewayBold60.render("Flood", True, BLACK)
@@ -191,6 +212,7 @@ storm = image.load("images/storm.png")
 storm = transform.scale(storm, (118,118))
 stormText = ralewayBold60.render("Severe Storm", True, BLACK)
 #-------------------------------------------------------------------
+#ORGANIZING THE MENU LAYOUT
 disasterRects = []
 xCount = 0
 yCount = 0
@@ -201,7 +223,8 @@ for i in range(3):
     disasterRects.append(Rect(screenWidth/2 + screenWidth/8, screenHeight/8 + 140*i, 120, 120))
 disasterText = ralewayBold60.render("Disaster Type", True, BLACK)
 ####################################################################
-if hoes == "true": #SETUP LOOP
+#SETUP LOOP
+if hoes == "true": 
     print("Aye")
     while running:
         leftClick = False #leftClick and rightClick are used to prevent accidental drag
@@ -287,7 +310,8 @@ if hoes == "true": #SETUP LOOP
                 screenPosition = "disasters"
         display.flip()
 #########################################################################
-else: #USAGE LOOP
+#USAGE LOOP
+else: 
     while running:
         leftClick = False #leftClick and rightClick are used to prevent accidental drag
         for evt in event.get():
