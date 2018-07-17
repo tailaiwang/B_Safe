@@ -47,40 +47,98 @@ def drawDisasters():
     screen.blit(backPic, (backRect[0], backRect[1]))
     screen.blit(wildfire, (disasterRects[0][0] + 2, disasterRects[0][1] + 2))
     screen.blit(storm, (disasterRects[1][0] + 2 , disasterRects[1][1] + 2))
-    screen.blit(landslide, (disasterRects[2][0] + 2 , disasterRects[2][1] + 2))
+    screen.blit(earthquake, (disasterRects[2][0] + 2 , disasterRects[2][1] + 2))
     screen.blit(flood, (disasterRects[3][0] + 2 , disasterRects[3][1] + 2))
     screen.blit(avalanche, (disasterRects[4][0] + 2 , disasterRects[4][1] + 2))
     screen.blit(hurricane, (disasterRects[5][0] + 2 , disasterRects[5][1] + 2))
 
 def drawFire():
+    screen.blit(wildfireText, (screenWidth/2 - wildfireText.get_width()/2, 0))
     draw.rect(screen, BLACK, backRect, 2)
     screen.blit(backPic, (backRect[0], backRect[1]))
+    count  = 0
+    for data in wildfireData:
+        temp = ralewayRegular24.render(str(count + 1) + ". " + data, True, BLACK)
+        screen.blit(temp, (0,200 + count*20))
+        count += 1
 
 def drawStorm():
+    screen.blit(stormText, (screenWidth/2 - stormText.get_width()/2, 0))
     draw.rect(screen, BLACK, backRect, 2)
     screen.blit(backPic, (backRect[0], backRect[1]))
+    count  = 0
+    for data in stormData:
+        temp = ralewayRegular24.render(str(count + 1) + ". " + data, True, BLACK)
+        screen.blit(temp, (0,200 + count*20))
+        count += 1
 
-def drawLandslide():
+def drawearthquake():
+    screen.blit(earthquakeText, (screenWidth/2 - earthquakeText.get_width()/2, 0))
     draw.rect(screen, BLACK, backRect, 2)
     screen.blit(backPic, (backRect[0], backRect[1]))
+    count  = 0
+    for data in earthquakeData:
+        temp = ralewayRegular24.render(str(count + 1) + ". " + data, True, BLACK)
+        screen.blit(temp, (0,200 + count*20))
+        count += 1
 
 def drawFlood():
+    screen.blit(floodText, (screenWidth/2 - floodText.get_width()/2, 0))
     draw.rect(screen, BLACK, backRect, 2)
     screen.blit(backPic, (backRect[0], backRect[1]))
+    count  = 0
+    for data in floodData:
+        temp = ralewayRegular24.render(str(count + 1) + ". " + data, True, BLACK)
+        screen.blit(temp, (0,200 + count*20))
+        count += 1
 
 def drawAvalanche():
+    screen.blit(avalancheText, (screenWidth/2 - avalancheText.get_width()/2, 0))
     draw.rect(screen, BLACK, backRect, 2)
     screen.blit(backPic, (backRect[0], backRect[1]))
+    count  = 0
+    for data in avalancheData:
+        temp = ralewayRegular24.render(str(count + 1) + ". " + data, True, BLACK)
+        screen.blit(temp, (0,200 + count*20))
+        count += 1
 
 def drawHurricane():
+    screen.blit(hurricaneText, (screenWidth/2 - hurricaneText.get_width()/2, 0))
     draw.rect(screen, BLACK, backRect, 2)
     screen.blit(backPic, (backRect[0], backRect[1]))
+    count  = 0
+    for data in hurricaneData:
+        temp = ralewayRegular24.render(str(count + 1) + ". " + data, True, BLACK)
+        screen.blit(temp, (0,200 + count*20))
+        count += 1
 #-------------------------------------------------------------------
 logo = image.load("images/logo.jpg")
 infile = open("setup.txt")
 hoes = infile.readline()
 print(hoes)
 infile.close()
+####################################################################
+wildfireFile = open("data/wildfire.txt")
+wildfireData = wildfireFile.readlines()
+wildfireFile.close()
+stormFile = open("data/storm.txt")
+stormData = stormFile.readlines()
+stormFile.close()
+earthquakeFile = open("data/earthquake.txt")
+earthquakeData = earthquakeFile.readlines()
+earthquakeFile.close()
+floodFile = open("data/flood.txt")
+floodData = floodFile.readlines()
+floodFile.close()
+avalancheFile = open("data/avalanche.txt")
+avalancheData = avalancheFile.readlines()
+avalancheFile.close()
+hurricaneFile = open("data/hurricane.txt")
+hurricaneData = hurricaneFile.readlines()
+hurricaneFile.close()
+
+
+
 ####################################################################
 screenWidth = 640
 screenHeight = 640
@@ -102,6 +160,7 @@ font.init()
 ralewayBold60 = font.Font("raleway/Raleway-Bold.ttf",60)
 ralewayRegular48 = font.Font("raleway/Raleway-Regular.ttf", 48)
 ralewayMedium36 = font.Font("raleway/Raleway-Medium.ttf", 36)
+ralewayRegular24 = font.Font("raleway/Raleway-Regular.ttf", 24)
 testText =ralewayBold60.render("B-Safe", True, BLACK)
 testTextX,testTextY = ralewayBold60.size("B-Safe")
 ####################################################################
@@ -115,16 +174,22 @@ backPic = transform.scale(backPic, (int(screenWidth/4), 100))
 ###################################################################
 flood = image.load("images/flood.png")
 flood = transform.scale(flood, (118,118))
+floodText = ralewayBold60.render("Flood", True, BLACK)
 avalanche = image.load("images/avalanche.png")
 avalanche = transform.scale(avalanche, (118,118))
+avalancheText = ralewayBold60.render("Avalanche", True, BLACK)
 wildfire = image.load("images/wildfire.png")
 wildfire = transform.scale(wildfire, (118,118))
-landslide = image.load("images/landslide.jpg")
-landslide = transform.scale(landslide, (118,118))
+wildfireText = ralewayBold60.render("Wildfire", True, BLACK)
+earthquake = image.load("images/landslide.jpg")
+earthquake = transform.scale(earthquake, (118,118))
+earthquakeText = ralewayBold60.render("Earthquake", True, BLACK)
 hurricane = image.load("images/hurricane.png")
 hurricane = transform.scale(hurricane, (118,118))
+hurricaneText = ralewayBold60.render("Hurricane", True, BLACK)
 storm = image.load("images/storm.png")
 storm = transform.scale(storm, (118,118))
+stormText = ralewayBold60.render("Severe Storm", True, BLACK)
 #-------------------------------------------------------------------
 disasterRects = []
 xCount = 0
@@ -171,8 +236,8 @@ if hoes == "true": #SETUP LOOP
                         screenPosition = "severe storm"
                         print("Storm")
                     elif (i == disasterRects[2]):
-                        screenPosition = "landslide"
-                        print("Landslide")
+                        screenPosition = "earthquake"
+                        print("earthquake")
                     elif (i == disasterRects[3]):
                         screenPosition = "flood"
                         print("Flood")
@@ -197,9 +262,9 @@ if hoes == "true": #SETUP LOOP
             if (backRect.collidepoint(mx,my) and leftClick):
                 screenPosition = "disasters"
                 
-        if screenPosition == "landslide":
+        if screenPosition == "earthquake":
             screenFill(WHITE)
-            drawLandslide()
+            drawearthquake()
             if (backRect.collidepoint(mx,my) and leftClick):
                 screenPosition = "disasters"
                 
@@ -221,7 +286,8 @@ if hoes == "true": #SETUP LOOP
             if (backRect.collidepoint(mx,my) and leftClick):
                 screenPosition = "disasters"
         display.flip()
-else:
+#########################################################################
+else: #USAGE LOOP
     while running:
         leftClick = False #leftClick and rightClick are used to prevent accidental drag
         for evt in event.get():
