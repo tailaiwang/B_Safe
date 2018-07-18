@@ -27,7 +27,15 @@ pygame.mixer.pre_init(22050,-16,2,2048) #sound
 
 root = tk.Tk() #tkinter
 root.withdraw()
-
+####################################################################
+#SCREEN STUFF AND CONSTANTS
+screenWidth = 640
+screenHeight = 640
+BLACK = (0,0,0)
+WHITE = (255,255,255)
+RED = (255,0,0)
+GREY = (111,111,111)
+screen = display.set_mode((screenWidth,screenHeight))#screen size (16:9 iOS ratios)
 #######################################################################
 #ALL FUNCTIONS 
 def screenFill(c): #Where c is a color
@@ -51,6 +59,9 @@ def drawDisasters():
     screen.blit(disasterText, (screenWidth/2 - disasterText.get_width()/2, 0))
     draw.rect(screen, BLACK, backRect, 2)
     screen.blit(backPic, (backRect[0], backRect[1]))
+    draw.rect(screen,BLACK, finishRect, 2)
+    screen.blit(finishText, (finishRect[0] + finishRect[2]/2 - finishText.get_width()/2, finishRect[1]))  
+    screen.blit(finishText2, (finishRect[0] + finishRect[2]/2 - finishText2.get_width()/2, finishRect[1]+finishRect[3]/2))
     screen.blit(wildfire, (disasterRects[0][0] + 2, disasterRects[0][1] + 2))
     screen.blit(storm, (disasterRects[1][0] + 2 , disasterRects[1][1] + 2))
     screen.blit(earthquake, (disasterRects[2][0] + 2 , disasterRects[2][1] + 2))
@@ -65,8 +76,9 @@ def drawFire():
     count  = 0
     for data in wildfireData:
         temp = ralewayRegular24.render(str(count + 1) + ". " + data, True, BLACK)
-        screen.blit(temp, (0,200 + count*20))
+        screen.blit(temp, (0,200 + count*25))
         count += 1
+    
 
 def drawStorm():
     screen.blit(stormText, (screenWidth/2 - stormText.get_width()/2, 0))
@@ -75,8 +87,9 @@ def drawStorm():
     count  = 0
     for data in stormData:
         temp = ralewayRegular24.render(str(count + 1) + ". " + data, True, BLACK)
-        screen.blit(temp, (0,200 + count*20))
+        screen.blit(temp, (0,200 + count*25))
         count += 1
+        
 
 def drawearthquake():
     screen.blit(earthquakeText, (screenWidth/2 - earthquakeText.get_width()/2, 0))
@@ -85,7 +98,7 @@ def drawearthquake():
     count  = 0
     for data in earthquakeData:
         temp = ralewayRegular24.render(str(count + 1) + ". " + data, True, BLACK)
-        screen.blit(temp, (0,200 + count*20))
+        screen.blit(temp, (0,200 + count*25))
         count += 1
 
 def drawFlood():
@@ -95,7 +108,7 @@ def drawFlood():
     count  = 0
     for data in floodData:
         temp = ralewayRegular24.render(str(count + 1) + ". " + data, True, BLACK)
-        screen.blit(temp, (0,200 + count*20))
+        screen.blit(temp, (0,200 + count*25))
         count += 1
 
 def drawAvalanche():
@@ -105,7 +118,7 @@ def drawAvalanche():
     count  = 0
     for data in avalancheData:
         temp = ralewayRegular24.render(str(count + 1) + ". " + data, True, BLACK)
-        screen.blit(temp, (0,200 + count*20))
+        screen.blit(temp, (0,200 + count*25))
         count += 1
 
 def drawHurricane():
@@ -115,7 +128,7 @@ def drawHurricane():
     count  = 0
     for data in hurricaneData:
         temp = ralewayRegular24.render(str(count + 1) + ". " + data, True, BLACK)
-        screen.blit(temp, (0,200 + count*20))
+        screen.blit(temp, (0,200 + count*25))
         count += 1
 #-------------------------------------------------------------------
 
@@ -149,15 +162,36 @@ hurricaneFile.close()
 
 #-------------------------------------------------------------------
 #ORGANIZING DATA RECTS
-####################################################################
-#SCREEN STUFF AND CONSTANTS
-screenWidth = 640
-screenHeight = 640
-BLACK = (0,0,0)
-WHITE = (255,255,255)
-RED = (255,0,0)
-GREY = (111,111,111)
-screen = display.set_mode((screenWidth,screenHeight))#screen size (16:9 iOS ratios)
+wildfireRects = []
+stormRects = []
+earthquakeRects = []
+floodRects = []
+avalancheRects = []
+hurricaneRects= []
+count = 0
+for data in wildfireData:
+    wildfireRects.append(Rect(0, 200 + count*25, screenWidth, 25))
+    count += 1
+count = 0
+for data in stormData:
+    stormRects.append(Rect(0, 200 + count*25, screenWidth, 25))
+    count += 1
+count = 0
+for data in earthquakeData:
+    earthquakeRects.append(Rect(0, 200 + count*25, screenWidth, 25))
+    count += 1
+count = 0
+for data in floodData:
+    floodRects.append(Rect(0, 200 + count*25, screenWidth, 25))
+    count += 1
+count = 0
+for data in avalancheData:
+    avalancheRects.append(Rect(0, 200 + count*25, screenWidth, 25))
+    count += 1
+count = 0
+for data in hurricaneData:
+    hurricaneRects.append(Rect(0, 200 + count*25, screenWidth, 25))
+    count += 1
 #####################################################################
 #LAUCH SEQUENCE ITEMS
 logo = image.load("images/logo.jpg")
@@ -191,6 +225,9 @@ startText2 = ralewayRegular48.render("Start", True, BLACK)
 backRect = Rect(0,screenHeight - 100, screenWidth/4, 100)
 backPic = image.load("images/back.png")
 backPic = transform.scale(backPic, (int(screenWidth/4), 100))
+finishText = ralewayMedium36.render("End", True, BLACK)
+finishText2 = ralewayMedium36.render("Setup", True, BLACK)
+finishRect = Rect(screenWidth - screenWidth/4, screenHeight - 100, int(screenWidth/4), 100)
 ###################################################################
 #MENU ICONS AND TEXT
 flood = image.load("images/flood.png")
@@ -272,42 +309,56 @@ if hoes == "true":
                         print("Hurricane")
             if (backRect.collidepoint(mx,my) and leftClick):
                 screenPosition = "start"
+            if (finishRect.collidepoint(mx,my) and leftClick):
+                hoes = "false"
 
         if screenPosition == "wildfire":
             screenFill(WHITE)
             drawFire()
             if (backRect.collidepoint(mx,my) and leftClick):
                 screenPosition = "disasters"
+            if (wildfireRects[-1].collidepoint(mx,my) and leftClick):
+                print("Click")
                 
         if screenPosition == "severe storm":
             screenFill(WHITE)
             drawStorm()
             if (backRect.collidepoint(mx,my) and leftClick):
                 screenPosition = "disasters"
+            if (stormRects[-1].collidepoint(mx,my) and leftClick):
+                print("Click")
                 
         if screenPosition == "earthquake":
             screenFill(WHITE)
             drawearthquake()
             if (backRect.collidepoint(mx,my) and leftClick):
                 screenPosition = "disasters"
+            if (earthquakeRects[-1].collidepoint(mx,my) and leftClick):
+                print("Click")
                 
         if screenPosition == "flood":
             screenFill(WHITE)
             drawFlood()
             if (backRect.collidepoint(mx,my) and leftClick):
                 screenPosition = "disasters"
+            if (floodRects[-1].collidepoint(mx,my) and leftClick):
+                print("Click")
                 
         if screenPosition == "avalanche":
             screenFill(WHITE)
             drawAvalanche()
             if (backRect.collidepoint(mx,my) and leftClick):
                 screenPosition = "disasters"
+            if (avalancheRects[-1].collidepoint(mx,my) and leftClick):
+                print("Click")
                 
         if screenPosition == "hurricane":
             screenFill(WHITE)
             drawHurricane()
             if (backRect.collidepoint(mx,my) and leftClick):
                 screenPosition = "disasters"
+            if (hurricaneRects[-1].collidepoint(mx,my) and leftClick):
+                print("Click")
         display.flip()
 #########################################################################
 #USAGE LOOP
