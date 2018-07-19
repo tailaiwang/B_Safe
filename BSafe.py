@@ -11,8 +11,8 @@
 #Engineering Team
 #Nader St. Amant (President)
 #Tailai Wang (VP and Software Lead)
-#Alex Bae (Software and Design Engineering)
-#Sarah Foster (Sofrtware and Design Engineering)
+#Alex Bae (Team Spirit Engineer)
+#Sarah Foster (Moral Support Engineer)
 from pygame import* #all pygame files require this 
 from pygame.locals import* #Positions and "tings"
 from random import* #shuffle and randint and such things
@@ -37,7 +37,9 @@ RED = (255,0,0)
 GREY = (111,111,111)
 screen = display.set_mode((screenWidth,screenHeight))#screen size (16:9 iOS ratios)
 #######################################################################
-#ALL FUNCTIONS 
+#ALL FUNCTIONS
+#----------------------------------------------------------------------
+#SETUP FUNCTIONS
 def screenFill(c): #Where c is a color
     draw.rect(screen,(c), (0,0,screenWidth,screenHeight))
 
@@ -46,13 +48,6 @@ def drawStartSetup():
     screen.blit(startText, (screenWidth/2 - startText.get_width()/2, screenHeight/8))
     draw.rect(screen, BLACK, setupRect, 2)
     screen.blit(setupText, (setupRect[0] + setupRect[2]/6, setupRect[1] - setupText.get_height()/8))
-
-def drawStart():
-    screen.blit(testText, (screenWidth/2 - testTextX/2, screenHeight/32))
-    screen.blit(startText, (screenWidth/2 - startText.get_width()/2, screenHeight/8))
-    draw.rect(screen, BLACK, setupRect, 2)
-    screen.blit(startText2, (setupRect[0] + setupRect[2]/4, setupRect[1] - startText2.get_height()/16))
-
 def drawDisasters():
     for i in disasterRects:
         draw.rect(screen, BLACK, i, 2)
@@ -130,7 +125,19 @@ def drawHurricane():
         temp = ralewayRegular24.render(str(count + 1) + ". " + data, True, BLACK)
         screen.blit(temp, (0,200 + count*25))
         count += 1
+
+def drawThanks():
+    screen.blit(thanksText, (screenWidth/2 - thanksText.get_width()/2, int(screenHeight/5)))
+    screen.blit(thanksText2, (screenWidth/2 - thanksText2.get_width()/2, int(screenHeight/3)))
+    screen.blit(thanksText3, (screenWidth/2 - thanksText3.get_width()/2, int(screenHeight/2)))
+
 #-------------------------------------------------------------------
+#REGULAR RUN FUNCTIONS
+def drawStart():
+    screen.blit(testText, (screenWidth/2 - testTextX/2, screenHeight/32))
+    screen.blit(startText, (screenWidth/2 - startText.get_width()/2, screenHeight/8))
+    draw.rect(screen, BLACK, setupRect, 2)
+    screen.blit(startText2, (setupRect[0] + setupRect[2]/4, setupRect[1] - startText2.get_height()/16))
 
 ####################################################################
 #DATA HANDLING I/O
@@ -228,6 +235,9 @@ backPic = transform.scale(backPic, (int(screenWidth/4), 100))
 finishText = ralewayMedium36.render("End", True, BLACK)
 finishText2 = ralewayMedium36.render("Setup", True, BLACK)
 finishRect = Rect(screenWidth - screenWidth/4, screenHeight - 100, int(screenWidth/4), 100)
+thanksText = ralewayBold60.render("Setup Complete", True, BLACK)
+thanksText2 = ralewayMedium36.render("Thank you for choosing B-Safe", True, GREY)
+thanksText3 = ralewayRegular24.render("Press ENTER to continue", True, BLACK)
 ###################################################################
 #MENU ICONS AND TEXT
 flood = image.load("images/flood.png")
@@ -260,24 +270,27 @@ for i in range(3):
     disasterRects.append(Rect(screenWidth/2 + screenWidth/8, screenHeight/8 + 140*i, 120, 120))
 disasterText = ralewayBold60.render("Disaster Type", True, BLACK)
 ####################################################################
+while running:
+    leftClick = False #leftClick and rightClick are used to prevent accidental drag
+    enter = False
+    for evt in event.get():
+        if evt.type == QUIT:
+            running=False
+        if evt.type == KEYDOWN:
+            if evt.key == K_ESCAPE:
+                running = False #shuts program on ESC
+            if evt.key == K_RETURN:
+                enter = True
+        if evt.type == MOUSEBUTTONDOWN:
+            if evt.button == 1:
+                leftClick = True
+        
+#---------------------------------------------------------------------
+    mx,my = mouse.get_pos() #Mouse position
+#---------------------------------------------------------------------
 #SETUP LOOP
-if hoes == "true": 
-    print("Aye")
-    while running:
-        leftClick = False #leftClick and rightClick are used to prevent accidental drag
-        for evt in event.get():
-            if evt.type == QUIT:
-                running=False
-            if evt.type == KEYDOWN:
-                if evt.key == K_ESCAPE:
-                    running = False #shuts program on ESC
-            if evt.type == MOUSEBUTTONDOWN:
-                if evt.button == 1:
-                    leftClick = True
-    #---------------------------------------------------------------------
-        mx,my = mouse.get_pos() #Mouse position
-    #---------------------------------------------------------------------
-        if screenPosition == "start":
+    if hoes == "true": 
+        if screenPosition == "start": 
             screenFill(WHITE)
             drawStartSetup()
             if (setupRect.collidepoint(mx,my) and (leftClick)):
@@ -310,7 +323,7 @@ if hoes == "true":
             if (backRect.collidepoint(mx,my) and leftClick):
                 screenPosition = "start"
             if (finishRect.collidepoint(mx,my) and leftClick):
-                hoes = "false"
+                screenPosition = "thanks"
 
         if screenPosition == "wildfire":
             screenFill(WHITE)
@@ -359,30 +372,38 @@ if hoes == "true":
                 screenPosition = "disasters"
             if (hurricaneRects[-1].collidepoint(mx,my) and leftClick):
                 print("Click")
+
+        if screenPosition == "thanks":
+            screenFill(WHITE)
+            drawThanks()
+            if enter == True:
+                hoes = "false"
+                screenPosition = "start"
         display.flip()
 #########################################################################
 #USAGE LOOP
-else: 
-    while running:
-        leftClick = False #leftClick and rightClick are used to prevent accidental drag
-        for evt in event.get():
-            if evt.type == QUIT:
-                running=False
-            if evt.type == KEYDOWN:
-                if evt.key == K_ESCAPE:
-                    running = False #shuts program on ESC
-            if evt.type == MOUSEBUTTONDOWN:
-                if evt.button == 1:
-                    leftClick = True
-    #---------------------------------------------------------------------
-        mx,my = mouse.get_pos() #Mouse position
-        if screenPosition  == "start":
-            screenFill(WHITE)
-            screenFill(WHITE)
-            drawStart()
-            if (setupRect.collidepoint(mx,my) and (leftClick)):
-                draw.rect(screen, RED, setupRect, 1)
-                screenPosition = "disasters"
+    else:
+        while running:
+            leftClick = False #leftClick and rightClick are used to prevent accidental drag
+            for evt in event.get():
+                if evt.type == QUIT:
+                    running=False
+                if evt.type == KEYDOWN:
+                    if evt.key == K_ESCAPE:
+                        running = False #shuts program on ESC
+                if evt.type == MOUSEBUTTONDOWN:
+                    if evt.button == 1:
+                        leftClick = True
+        #---------------------------------------------------------------------
+            mx,my = mouse.get_pos() #Mouse position
+            if screenPosition  == "start":
+                screenFill(WHITE)
+                drawStart()
+                if (setupRect.collidepoint(mx,my) and (leftClick)):
+                    draw.rect(screen, RED, setupRect, 1)
+                    screenPosition = "disasters"
+
+            display.flip()
             
 #outfile = open("setup.txt", "w")
 #outfile.write("false")
