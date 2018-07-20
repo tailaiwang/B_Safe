@@ -81,7 +81,7 @@ def drawStorm():
     screen.blit(backPic, (backRect[0], backRect[1]))
     count  = 0
     for data in stormData:
-        temp = ralewayRegular24.render(str(count + 1) + ". " + data, True, BLACK)
+        temp = ralewayRegular24.render(str(count + 1) + ". " + data, True, BLACK) 
         screen.blit(temp, (0,200 + count*25))
         count += 1
         
@@ -131,6 +131,8 @@ def drawThanks():
     screen.blit(thanksText2, (screenWidth/2 - thanksText2.get_width()/2, int(screenHeight/3)))
     screen.blit(thanksText3, (screenWidth/2 - thanksText3.get_width()/2, int(screenHeight/2)))
 
+
+
 #-------------------------------------------------------------------
 #REGULAR RUN FUNCTIONS
 def drawStart():
@@ -138,6 +140,35 @@ def drawStart():
     screen.blit(startText, (screenWidth/2 - startText.get_width()/2, screenHeight/8))
     draw.rect(screen, BLACK, setupRect, 2)
     screen.blit(startText2, (setupRect[0] + setupRect[2]/4, setupRect[1] - startText2.get_height()/16))
+    draw.rect(screen, BLACK, infoRect, 2)
+    screen.blit(infoText, (infoRect[0]+ infoRect[2]/2 - infoText.get_width()/2, infoRect[1] - infoText.get_height()/16))
+
+def drawInfo():
+    screen.blit(smallLogo, (screenWidth/2 - smallLogo.get_width()/2, 0))
+    screen.blit(missionText, (screenWidth/2 - missionText.get_width()/2, screenHeight/5))
+    screen.blit(missionText2, (screenWidth/2 - missionText2.get_width()/2, screenHeight/5 + screenHeight/8))
+    screen.blit(missionText3, (screenWidth/2 - missionText3.get_width()/2, screenHeight/5 + screenHeight/8 + 25))
+    screen.blit(visionText, (screenWidth/2 - visionText.get_width()/2, screenHeight/2))
+    screen.blit(visionText2, (screenWidth/2 - visionText2.get_width()/2, screenHeight/2 + screenHeight/8))
+    draw.rect(screen, BLACK, backRect, 2)
+    screen.blit(backPic, (backRect[0], backRect[1]))
+
+def drawBar():
+    for i in barRects:
+        draw.rect(screen, BLACK, i, 2)
+
+
+def drawBinformed():
+    draw.rect(screen, RED, informedRect, 2)
+
+def drawBprepared():
+    draw.rect(screen, RED, preparedRect, 2)
+
+def drawBsafe():
+    draw.rect(screen, RED, safeRect, 2)
+
+def drawBresilient():
+    draw.rect(screen, RED, resilientRect, 2)
 
 ####################################################################
 #DATA HANDLING I/O
@@ -166,6 +197,9 @@ hurricaneData = hurricaneFile.readlines()
 hurricaneData.append("ADD NEW")
 hurricaneFile.close()
 
+missionFile = open("data/mission.txt")
+missionData = missionFile.readlines()
+missionFile.close()
 
 #-------------------------------------------------------------------
 #ORGANIZING DATA RECTS
@@ -202,6 +236,7 @@ for data in hurricaneData:
 #####################################################################
 #LAUCH SEQUENCE ITEMS
 logo = image.load("images/logo.jpg")
+smallLogo = transform.scale(logo, (int(logo.get_width()/2), int(logo.get_height()/2)))
 infile = open("setup.txt")
 hoes = infile.readline()
 print(hoes) #Checks which launch sequence to go through
@@ -238,6 +273,9 @@ finishRect = Rect(screenWidth - screenWidth/4, screenHeight - 100, int(screenWid
 thanksText = ralewayBold60.render("Setup Complete", True, BLACK)
 thanksText2 = ralewayMedium36.render("Thank you for choosing B-Safe", True, GREY)
 thanksText3 = ralewayRegular24.render("Press ENTER to continue", True, BLACK)
+infoText = ralewayRegular48.render("Info", True, BLACK)
+infoRect = Rect(screenWidth/2 - 100, screenHeight/2 + 100, 200, 50)
+
 ###################################################################
 #MENU ICONS AND TEXT
 flood = image.load("images/flood.png")
@@ -259,6 +297,30 @@ storm = image.load("images/storm.png")
 storm = transform.scale(storm, (118,118))
 stormText = ralewayBold60.render("Severe Storm", True, BLACK)
 #-------------------------------------------------------------------
+####################################################################
+#REGULAR SEQUENCE ICONS AND TEXT
+#-------------------------------------------------------------------
+#Info Menu
+missionText = ralewayRegular48.render("Mission", True, BLACK)
+missionText2 = ralewayRegular24.render(missionData[0], True, GREY)
+missionText3 = ralewayRegular24.render(missionData[1], True, GREY)
+visionText = ralewayRegular48.render("Vision", True, BLACK)
+visionText2 = ralewayRegular24.render(missionData[2], True, GREY)
+#-------------------------------------------------------------------
+#Regular Sequence
+
+####################################################################
+#REGULAR SEQUENCE RECTS
+barRects = []
+informedRect = Rect(0,screenHeight - 75, screenWidth/4, 75)
+preparedRect = Rect(screenWidth/4, screenHeight - 75, screenWidth/4, 75)
+safeRect = Rect(screenWidth/2, screenHeight - 75, screenWidth/4, 75)
+resilientRect = Rect(screenWidth - screenWidth/4, screenHeight - 75, screenWidth/4, 75)
+barRects.append(informedRect)
+barRects.append(preparedRect)
+barRects.append(safeRect)
+barRects.append(resilientRect)
+####################################################################
 #ORGANIZING THE MENU LAYOUT
 disasterRects = []
 xCount = 0
@@ -400,10 +462,70 @@ while running:
                 screenFill(WHITE)
                 drawStart()
                 if (setupRect.collidepoint(mx,my) and (leftClick)):
-                    draw.rect(screen, RED, setupRect, 1)
-                    screenPosition = "disasters"
+                    screenPosition = "b_informed"
+                if (infoRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "info"
 
+            if screenPosition == "info":
+                screenFill(WHITE)
+                drawInfo()
+                if (backRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "start"
             display.flip()
+
+            if screenPosition == "b_informed":
+                screenFill(WHITE)
+                drawBar()
+                drawBinformed()
+                if (informedRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_informed"
+                if (preparedRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_prepared"
+                if (safeRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_safe"
+                if (resilientRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_resilient"
+            
+            if screenPosition == "b_prepared":
+                screenFill(WHITE)
+                drawBar()
+                drawBprepared()
+                if (informedRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_informed"
+                if (preparedRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_prepared"
+                if (safeRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_safe"
+                if (resilientRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_resilient"
+
+            if screenPosition == "b_safe":
+                screenFill(WHITE)
+                drawBar()
+                drawBsafe()
+                if (informedRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_informed"
+                if (preparedRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_prepared"
+                if (safeRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_safe"
+                if (resilientRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_resilient"
+
+            if screenPosition == "b_resilient":
+                screenFill(WHITE)
+                drawBar()
+                drawBresilient()
+                if (informedRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_informed"
+                if (preparedRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_prepared"
+                if (safeRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_safe"
+                if (resilientRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_resilient"
+                
+                
             
 #outfile = open("setup.txt", "w")
 #outfile.write("false")
