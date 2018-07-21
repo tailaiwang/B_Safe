@@ -172,6 +172,27 @@ def drawBar():
 def drawBinformed():
     screen.blit(informedText, (screenWidth/2 - informedText.get_width()/2, 75/2 - informedText.get_height()/2))
     draw.rect(screen, RED, informedRect, 2)
+    screen.blit(updateText, (screenWidth/2 - updateText.get_width()/2, 80))
+    count = 0
+    for i in informedData:
+        if (i != informedData[0]):
+            if (i != informedData[1]):
+                temp = ralewayRegular24.render(i , True, BLACK)
+                temp2 = ralewayRegular12.render("THIS IS SAMPLE TEXT. Black headlines are local events that are somewhat relevant to the user.", True, GREY)
+
+            else:
+                temp = ralewayRegular24.render(i, True, RED)
+                temp2 = ralewayRegular12.render("THIS IS SAMPLE TEXT. Red headlines are urgent and most relevant to the user.", True, GREY)
+
+            screen.blit(temp2, (10, screenHeight/5 +count * 100 + 40))
+            screen.blit(temp, (10, screenHeight/5 + count * 100))
+            draw.rect(screen, BLACK, (0, screenHeight/5 + count * 100, screenWidth, 100), 2)
+            count += 1
+    count = 0
+    for pic in informedPics:
+        screen.blit(pic, (screenWidth-98, screenHeight/5 + count * 100 + 2))
+        count += 1
+    
 
 def drawBprepared():
     screen.blit(preparedText, (screenWidth/2 - preparedText.get_width()/2, 75/2 - preparedText.get_height()/2))
@@ -361,6 +382,7 @@ ralewayBold60 = font.Font("raleway/Raleway-Bold.ttf",60)
 ralewayRegular48 = font.Font("raleway/Raleway-Regular.ttf", 48)
 ralewayMedium36 = font.Font("raleway/Raleway-Medium.ttf", 36)
 ralewayRegular24 = font.Font("raleway/Raleway-Regular.ttf", 24)
+ralewayRegular12 = font.Font("raleway/Raleway-Regular.ttf", 12)
 testText =ralewayBold60.render("B-Safe", True, BLACK)
 testTextX,testTextY = ralewayBold60.size("B-Safe")
 ####################################################################
@@ -440,6 +462,25 @@ profileIcon = transform.scale(profileIcon, (75,75))
 safeInstructions = ralewayRegular24.render("Select the relevant disaster to initiate the B-Safe Helper", True, GREY)
 safeInstructions2 = ralewayMedium36.render("B-Safe Helper Audio Activated.", True, RED)
 safeInstructions3 = ralewayRegular24.render("Contact Local Emergency Services for more info.", True, GREY)
+#-------------------------------------------------------------------
+informedHeadlines = open("data/informed.txt")
+informedData = informedHeadlines.readlines()
+informedHeadlines.close()
+informedSrc = open("data/informedPics.txt")
+informedImages = informedSrc.readlines()
+informedSrc.close()
+informedPics = []
+temp = transform.scale(image.load("images/news/okanagan.jpg"), (98,98))
+temp2 = transform.scale(image.load("images/news/edmontonStorm.jpg"), (98,98))
+temp3 = transform.scale(image.load("images/news/calgaryStorm.jpg"), (98,98))
+temp4 = transform.scale(image.load("images/news/summerWeather.jpeg"), (98,98))
+informedPics.append(temp)
+informedPics.append(temp2)
+informedPics.append(temp3)
+informedPics.append(temp4)
+updateText = ralewayRegular24.render("Updated " + informedData[0], True, GREY)
+
+
 
 ####################################################################
 #REGULAR SEQUENCE RECTS
