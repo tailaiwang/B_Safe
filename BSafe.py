@@ -154,21 +154,43 @@ def drawInfo():
     screen.blit(backPic, (backRect[0], backRect[1]))
 
 def drawBar():
+    screen.blit(homePic, (0,0))
+    draw.rect(screen, BLACK, homeRect, 2)
+    draw.rect(screen, BLACK, settingsRect, 2)
+    screen.blit(settingsPic, (settingsRect[0], settingsRect[1]))
     for i in barRects:
         draw.rect(screen, BLACK, i, 2)
+    screen.blit(informedIcon, (informedRect[0] + informedRect[2]/2 - 75/2, informedRect[1]))
+    screen.blit(preparedIcon, (preparedRect[0] + preparedRect[2]/2 - 75/2, preparedRect[1]))
+    screen.blit(safeIcon, (safeRect[0] + safeRect[2]/2 - 75/2, safeRect[1]))
+    screen.blit(resilientIcon, (resilientRect[0] + resilientRect[2]/2 - 75/2, resilientRect[1]))
+    screen.blit(profileIcon, (profileRect[0] + profileRect[2]/2 - 75/2, profileRect[1]))
+
 
 
 def drawBinformed():
+    screen.blit(informedText, (screenWidth/2 - informedText.get_width()/2, 75/2 - informedText.get_height()/2))
     draw.rect(screen, RED, informedRect, 2)
 
 def drawBprepared():
+    screen.blit(preparedText, (screenWidth/2 - preparedText.get_width()/2, 75/2 - preparedText.get_height()/2))
     draw.rect(screen, RED, preparedRect, 2)
 
 def drawBsafe():
+    screen.blit(safeText, (screenWidth/2 - safeText.get_width()/2, 75/2 - safeText.get_height()/2))
     draw.rect(screen, RED, safeRect, 2)
 
 def drawBresilient():
+    screen.blit(resilientText, (screenWidth/2 - resilientText.get_width()/2, 75/2 - resilientText.get_height()/2))
     draw.rect(screen, RED, resilientRect, 2)
+
+def drawProfile():
+    screen.blit(profileText, (screenWidth/2 - profileText.get_width()/2, 75/2 - profileText.get_height()/2))
+    draw.rect(screen, RED, profileRect, 2)
+
+def drawSettings():
+    screen.blit(settingsText, (screenWidth/2 - settingsText.get_width()/2, 75/2 - profileText.get_height()/2))
+    draw.rect(screen, RED, settingsRect, 2)
 
 ####################################################################
 #DATA HANDLING I/O
@@ -308,18 +330,44 @@ visionText = ralewayRegular48.render("Vision", True, BLACK)
 visionText2 = ralewayRegular24.render(missionData[2], True, GREY)
 #-------------------------------------------------------------------
 #Regular Sequence
+homePic = image.load("images/home.png")
+homePic = transform.scale(homePic, (75,75))
+homeRect = Rect(0,0,75,75)
+settingsPic = image.load("images/settings.png")
+settingsPic = transform.scale(settingsPic, (75,75))
+settingsRect = Rect(screenWidth - 75, 0, 75, 75)
+informedText = ralewayRegular48.render("B-Informed", True, BLACK)
+preparedText = ralewayRegular48.render("B-Prepared", True, BLACK)
+safeText = ralewayRegular48.render("B-Safe", True, BLACK)
+resilientText = ralewayRegular48.render("B-Resilient", True, BLACK)
+profileText = ralewayRegular48.render("Profile", True, BLACK)
+settingsText = ralewayRegular48.render("Settings", True, BLACK)
+#-------------------------------------------------------------------
+informedIcon = image.load("images/informedIcon.png")
+informedIcon = transform.scale(informedIcon, (75,75))
+preparedIcon = image.load("images/preparedIcon.png")
+preparedIcon = transform.scale(preparedIcon, (75,75))
+safeIcon = image.load("images/safeIcon.png")
+safeIcon = transform.scale(safeIcon, (75,75))
+resilientIcon = image.load("images/resilientIcon.png")
+resilientIcon = transform.scale(resilientIcon, (75,75))
+profileIcon = image.load("images/profileIcon.png")
+profileIcon = transform.scale(profileIcon, (75,75))
 
 ####################################################################
 #REGULAR SEQUENCE RECTS
 barRects = []
-informedRect = Rect(0,screenHeight - 75, screenWidth/4, 75)
-preparedRect = Rect(screenWidth/4, screenHeight - 75, screenWidth/4, 75)
-safeRect = Rect(screenWidth/2, screenHeight - 75, screenWidth/4, 75)
-resilientRect = Rect(screenWidth - screenWidth/4, screenHeight - 75, screenWidth/4, 75)
+informedRect = Rect(0,screenHeight - 75, screenWidth/5, 75)
+preparedRect = Rect(screenWidth/5, screenHeight - 75, screenWidth/5, 75)
+safeRect = Rect(screenWidth/5 + screenWidth/5, screenHeight - 75, screenWidth/5, 75)
+resilientRect = Rect(screenWidth - screenWidth/5 - screenWidth/5, screenHeight - 75, screenWidth/5, 75)
+profileRect = Rect(screenWidth - screenWidth/5, screenHeight - 75, screenWidth/5, 75)
+
 barRects.append(informedRect)
 barRects.append(preparedRect)
 barRects.append(safeRect)
 barRects.append(resilientRect)
+barRects.append(profileRect)
 ####################################################################
 #ORGANIZING THE MENU LAYOUT
 disasterRects = []
@@ -485,6 +533,12 @@ while running:
                     screenPosition = "b_safe"
                 if (resilientRect.collidepoint(mx,my) and (leftClick)):
                     screenPosition = "b_resilient"
+                if (profileRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "profile"
+                if (homeRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "start"
+                if (settingsRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "settings"
             
             if screenPosition == "b_prepared":
                 screenFill(WHITE)
@@ -498,6 +552,12 @@ while running:
                     screenPosition = "b_safe"
                 if (resilientRect.collidepoint(mx,my) and (leftClick)):
                     screenPosition = "b_resilient"
+                if (profileRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "profile"
+                if (homeRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "start"
+                if (settingsRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "settings"
 
             if screenPosition == "b_safe":
                 screenFill(WHITE)
@@ -511,6 +571,12 @@ while running:
                     screenPosition = "b_safe"
                 if (resilientRect.collidepoint(mx,my) and (leftClick)):
                     screenPosition = "b_resilient"
+                if (profileRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "profile"
+                if (homeRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "start"
+                if (settingsRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "settings"
 
             if screenPosition == "b_resilient":
                 screenFill(WHITE)
@@ -524,8 +590,50 @@ while running:
                     screenPosition = "b_safe"
                 if (resilientRect.collidepoint(mx,my) and (leftClick)):
                     screenPosition = "b_resilient"
-                
-                
+                if (profileRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "profile"
+                if (homeRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "start"
+                if (settingsRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "settings"
+
+            if screenPosition == "profile":
+                screenFill(WHITE)
+                drawBar()
+                drawProfile()
+                if (informedRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_informed"
+                if (preparedRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_prepared"
+                if (safeRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_safe"
+                if (resilientRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_resilient"
+                if (profileRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "profile"
+                if (homeRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "start"
+                if (settingsRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "settings"
+
+            if screenPosition == "settings":
+                screenFill(WHITE)
+                drawBar()
+                drawSettings()
+                if (informedRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_informed"
+                if (preparedRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_prepared"
+                if (safeRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_safe"
+                if (resilientRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_resilient"
+                if (profileRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "profile"
+                if (homeRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "start"
+                if (settingsRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "settings"
             
 #outfile = open("setup.txt", "w")
 #outfile.write("false")
