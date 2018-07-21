@@ -48,6 +48,7 @@ def drawStartSetup():
     screen.blit(startText, (screenWidth/2 - startText.get_width()/2, screenHeight/8))
     draw.rect(screen, BLACK, setupRect, 2)
     screen.blit(setupText, (setupRect[0] + setupRect[2]/6, setupRect[1] - setupText.get_height()/8))
+    
 def drawDisasters():
     for i in disasterRects:
         draw.rect(screen, BLACK, i, 2)
@@ -179,6 +180,15 @@ def drawBprepared():
 def drawBsafe():
     screen.blit(safeText, (screenWidth/2 - safeText.get_width()/2, 75/2 - safeText.get_height()/2))
     draw.rect(screen, RED, safeRect, 2)
+    for i in disasterRects:
+        draw.rect(screen, BLACK, i, 2)
+    screen.blit(wildfire, (disasterRects[0][0] + 2, disasterRects[0][1] + 2))
+    screen.blit(storm, (disasterRects[1][0] + 2 , disasterRects[1][1] + 2))
+    screen.blit(earthquake, (disasterRects[2][0] + 2 , disasterRects[2][1] + 2))
+    screen.blit(flood, (disasterRects[3][0] + 2 , disasterRects[3][1] + 2))
+    screen.blit(avalanche, (disasterRects[4][0] + 2 , disasterRects[4][1] + 2))
+    screen.blit(hurricane, (disasterRects[5][0] + 2 , disasterRects[5][1] + 2))
+    screen.blit(safeInstructions, (screenWidth/2 - safeInstructions.get_width()/2, screenHeight - screenHeight/5))
 
 def drawBresilient():
     screen.blit(resilientText, (screenWidth/2 - resilientText.get_width()/2, 75/2 - resilientText.get_height()/2))
@@ -191,6 +201,79 @@ def drawProfile():
 def drawSettings():
     screen.blit(settingsText, (screenWidth/2 - settingsText.get_width()/2, 75/2 - profileText.get_height()/2))
     draw.rect(screen, RED, settingsRect, 2)
+
+def drawFire2():
+    screen.blit(wildfireText, (screenWidth/2 - wildfireText.get_width()/2, 0))
+    screen.blit(safeInstructions2, (screenWidth/2 - safeInstructions2.get_width()/2, screenHeight/6))
+    screen.blit(safeInstructions3, (screenWidth/2 - safeInstructions3.get_width()/2, screenHeight/6 + 40))
+    draw.rect(screen, RED, safeRect, 2)
+    count  = 0
+    for data in wildfireData:
+        if (data != wildfireData[-1]):
+            temp = ralewayRegular24.render(str(count + 1) + ". " + data, True, BLACK)
+            screen.blit(temp, (0,200 + count*25))
+            count += 1
+    
+
+def drawStorm2():
+    screen.blit(stormText, (screenWidth/2 - stormText.get_width()/2, 0))
+    screen.blit(safeInstructions2, (screenWidth/2 - safeInstructions2.get_width()/2, screenHeight/6))
+    screen.blit(safeInstructions3, (screenWidth/2 - safeInstructions3.get_width()/2, screenHeight/6 + 40))
+    draw.rect(screen, RED, safeRect, 2)
+    count  = 0
+    for data in stormData:
+        if (data != stormData[-1]):
+            temp = ralewayRegular24.render(str(count + 1) + ". " + data, True, BLACK) 
+            screen.blit(temp, (0,200 + count*25))
+            count += 1
+        
+
+def drawearthquake2():
+    screen.blit(earthquakeText, (screenWidth/2 - earthquakeText.get_width()/2, 0))
+    screen.blit(safeInstructions2, (screenWidth/2 - safeInstructions2.get_width()/2, screenHeight/6))
+    screen.blit(safeInstructions3, (screenWidth/2 - safeInstructions3.get_width()/2, screenHeight/6 + 40))
+    draw.rect(screen, RED, safeRect, 2)
+    count  = 0
+    for data in earthquakeData:
+        if (data != earthquakeData[-1]):
+            temp = ralewayRegular24.render(str(count + 1) + ". " + data, True, BLACK)
+            screen.blit(temp, (0,200 + count*25))
+            count += 1
+
+def drawFlood2():
+    screen.blit(floodText, (screenWidth/2 - floodText.get_width()/2, 0))
+    screen.blit(safeInstructions2, (screenWidth/2 - safeInstructions2.get_width()/2, screenHeight/6))
+    screen.blit(safeInstructions3, (screenWidth/2 - safeInstructions3.get_width()/2, screenHeight/6 + 40))
+    count  = 0
+    for data in floodData:
+        if (data != floodData[-1]):
+            temp = ralewayRegular24.render(str(count + 1) + ". " + data, True, BLACK)
+            screen.blit(temp, (0,200 + count*25))
+            count += 1
+
+def drawAvalanche2():
+    screen.blit(avalancheText, (screenWidth/2 - avalancheText.get_width()/2, 0))
+    screen.blit(safeInstructions2, (screenWidth/2 - safeInstructions2.get_width()/2, screenHeight/6))
+    screen.blit(safeInstructions3, (screenWidth/2 - safeInstructions3.get_width()/2, screenHeight/6 + 40))
+    draw.rect(screen, RED, safeRect, 2)
+    count  = 0
+    for data in avalancheData:
+        if (data != avalancheData[-1]):
+            temp = ralewayRegular24.render(str(count + 1) + ". " + data, True, BLACK)
+            screen.blit(temp, (0,200 + count*25))
+            count += 1
+
+def drawHurricane2():
+    screen.blit(hurricaneText, (screenWidth/2 - hurricaneText.get_width()/2, 0))
+    screen.blit(safeInstructions2, (screenWidth/2 - safeInstructions2.get_width()/2, screenHeight/6))
+    screen.blit(safeInstructions3, (screenWidth/2 - safeInstructions3.get_width()/2, screenHeight/6 + 40))
+    draw.rect(screen, RED, safeRect, 2)
+    count  = 0
+    for data in hurricaneData:
+        if (data != hurricaneData [-1]):
+            temp = ralewayRegular24.render(str(count + 1) + ". " + data, True, BLACK)
+            screen.blit(temp, (0,200 + count*25))
+            count += 1
 
 ####################################################################
 #DATA HANDLING I/O
@@ -353,6 +436,10 @@ resilientIcon = image.load("images/resilientIcon.png")
 resilientIcon = transform.scale(resilientIcon, (75,75))
 profileIcon = image.load("images/profileIcon.png")
 profileIcon = transform.scale(profileIcon, (75,75))
+#-------------------------------------------------------------------
+safeInstructions = ralewayRegular24.render("Select the relevant disaster to initiate the B-Safe Helper", True, GREY)
+safeInstructions2 = ralewayMedium36.render("B-Safe Helper Audio Activated.", True, RED)
+safeInstructions3 = ralewayRegular24.render("Contact Local Emergency Services for more info.", True, GREY)
 
 ####################################################################
 #REGULAR SEQUENCE RECTS
@@ -577,6 +664,26 @@ while running:
                     screenPosition = "start"
                 if (settingsRect.collidepoint(mx,my) and (leftClick)):
                     screenPosition = "settings"
+                for i in disasterRects:
+                    if (i.collidepoint(mx,my) and (leftClick)):
+                        if (i == disasterRects[0]):
+                            screenPosition = "wildfire"
+                            print("Fire")
+                        elif (i == disasterRects[1]):
+                            screenPosition = "severe storm"
+                            print("Storm")
+                        elif (i == disasterRects[2]):
+                            screenPosition = "earthquake"
+                            print("earthquake")
+                        elif (i == disasterRects[3]):
+                            screenPosition = "flood"
+                            print("Flood")
+                        elif (i == disasterRects[4]):
+                            screenPosition = "avalanche"
+                            print("Avalanche")
+                        elif (i == disasterRects[5]):
+                            screenPosition = "hurricane"
+                            print("Hurricane")
 
             if screenPosition == "b_resilient":
                 screenFill(WHITE)
@@ -634,6 +741,122 @@ while running:
                     screenPosition = "start"
                 if (settingsRect.collidepoint(mx,my) and (leftClick)):
                     screenPosition = "settings"
+                    
+            if screenPosition == "wildfire":
+                screenFill(WHITE)
+                drawBar()
+                drawFire2()
+                if (informedRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_informed"
+                if (preparedRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_prepared"
+                if (safeRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_safe"
+                if (resilientRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_resilient"
+                if (profileRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "profile"
+                if (homeRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "start"
+                if (settingsRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "settings"
+
+                
+            if screenPosition == "severe storm":
+                screenFill(WHITE)
+                drawBar()
+                drawStorm2()
+                if (informedRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_informed"
+                if (preparedRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_prepared"
+                if (safeRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_safe"
+                if (resilientRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_resilient"
+                if (profileRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "profile"
+                if (homeRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "start"
+                if (settingsRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "settings"
+               
+            if screenPosition == "earthquake":
+                screenFill(WHITE)
+                drawBar()
+                drawearthquake2()
+                if (informedRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_informed"
+                if (preparedRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_prepared"
+                if (safeRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_safe"
+                if (resilientRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_resilient"
+                if (profileRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "profile"
+                if (homeRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "start"
+                if (settingsRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "settings"
+                    
+            if screenPosition == "flood":
+                screenFill(WHITE)
+                drawBar()
+                drawFlood2()
+                if (informedRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_informed"
+                if (preparedRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_prepared"
+                if (safeRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_safe"
+                if (resilientRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_resilient"
+                if (profileRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "profile"
+                if (homeRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "start"
+                if (settingsRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "settings"
+                    
+            if screenPosition == "avalanche":
+                screenFill(WHITE)
+                drawBar()
+                drawAvalanche2()
+                if (informedRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_informed"
+                if (preparedRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_prepared"
+                if (safeRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_safe"
+                if (resilientRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_resilient"
+                if (profileRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "profile"
+                if (homeRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "start"
+                if (settingsRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "settings"
+                    
+            if screenPosition == "hurricane":
+                screenFill(WHITE)
+                drawBar()
+                drawHurricane2()
+                if (informedRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_informed"
+                if (preparedRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_prepared"
+                if (safeRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_safe"
+                if (resilientRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "b_resilient"
+                if (profileRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "profile"
+                if (homeRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "start"
+                if (settingsRect.collidepoint(mx,my) and (leftClick)):
+                    screenPosition = "settings"
+            
             
 #outfile = open("setup.txt", "w")
 #outfile.write("false")
