@@ -34,6 +34,7 @@ screenHeight = 640
 BLACK = (0,0,0)
 WHITE = (255,255,255)
 RED = (255,0,0)
+GREEN = (0,255,0)
 GREY = (111,111,111)
 screen = display.set_mode((screenWidth,screenHeight))#screen size (16:9 iOS ratios)
 #######################################################################
@@ -184,7 +185,7 @@ def drawBinformed():
                 temp = ralewayRegular24.render(i, True, RED)
                 temp2 = ralewayRegular12.render("THIS IS SAMPLE TEXT. Red headlines are urgent and most relevant to the user.", True, GREY)
 
-            screen.blit(temp2, (10, screenHeight/5 +count * 100 + 40))
+            screen.blit(temp2, (10, screenHeight/5 + count * 100 + 40))
             screen.blit(temp, (10, screenHeight/5 + count * 100))
             draw.rect(screen, BLACK, (0, screenHeight/5 + count * 100, screenWidth, 100), 2)
             count += 1
@@ -197,6 +198,25 @@ def drawBinformed():
 def drawBprepared():
     screen.blit(preparedText, (screenWidth/2 - preparedText.get_width()/2, 75/2 - preparedText.get_height()/2))
     draw.rect(screen, RED, preparedRect, 2)
+    screen.blit(updateText2, (screenWidth/2 - updateText2.get_width()/2, 80))
+    count = 0
+    for i in preparedData:
+        if (i != preparedData[0]):
+            if (i != preparedData[1] and i != preparedData[2]):
+                temp = ralewayRegular24.render(i, True, BLACK)
+                temp2 = ralewayRegular12.render("THIS IS SAMPLE TEXT. Black headlines are instructional articles relevant to the user.", True, GREY)
+            else:
+                temp = ralewayRegular24.render(i, True, GREEN)
+                temp2 = ralewayRegular12.render("THIS IS SAMPLE TEXT. Green headlines are products/services relevant to the user.", True, GREY)
+
+            screen.blit(temp2, (10, screenHeight/5 + count * 100 + 40))
+            screen.blit(temp, (10, screenHeight/5 + count * 100))
+            draw.rect(screen, BLACK, (0, screenHeight/5 + count * 100, screenWidth, 100), 2)
+            count += 1
+    count = 0
+    for pic in preparedPics:
+        screen.blit(pic, (screenWidth-98, screenHeight/5 + count * 100 + 2))
+        count += 1
 
 def drawBsafe():
     screen.blit(safeText, (screenWidth/2 - safeText.get_width()/2, 75/2 - safeText.get_height()/2))
@@ -217,6 +237,37 @@ def drawBresilient():
 
 def drawProfile():
     screen.blit(profileText, (screenWidth/2 - profileText.get_width()/2, 75/2 - profileText.get_height()/2))
+    screen.blit(profilePic, (screenWidth/2 - profilePic.get_width()/2, 100))
+    count = 0
+    for i in range (3):
+        print(i)
+        if (i == 0):
+            temp = ralewayMedium36.render(profileData[i], True, BLACK)
+            screen.blit(temp, (screenWidth/2 - temp.get_width()/2, 250 + count*40))
+            
+        elif (i == 1):
+            temp = ralewayRegular24.render(profileData[i], True, BLACK)
+            screen.blit(temp, (screenWidth/2 - temp.get_width()/2, 250 + count*40))
+
+        else:
+            temp = ralewayRegular24.render(profileData[i], True, GREY)
+            screen.blit(temp, (screenWidth/2 - temp.get_width()/2, 320))
+
+        count += 1
+    screen.blit(mostText, (screenWidth/4 - mostText.get_width()/2, screenWidth/2 + 50))
+    screen.blit(wildfire, (screenWidth/4 - wildfire.get_width()/2, screenWidth/2 + 100))
+    screen.blit(achievementText, (screenWidth - screenWidth/4 - achievementText.get_width()/2, screenWidth/2 + 50))
+    screen.blit(prepperPic, (screenWidth/2 + 30, screenHeight/2 + 80))
+    screen.blit(runnerPic, (screenWidth/2 + 60 + 120, screenHeight/2 + 80))
+    count = 0
+    for i in profileData:
+        if (i == profileData[3]):
+            temp = ralewayRegular24.render(i, True, GREY)
+        elif (i == profileData[4] or i == profileData[5]):
+            temp = ralewayRegular12.render(i, True, GREY)
+            screen.blit(temp, (screenWidth/2 +  60 + count * 120, screenHeight/2 + 200))
+            count += 1
+
     draw.rect(screen, RED, profileRect, 2)
 
 def drawSettings():
@@ -298,32 +349,32 @@ def drawHurricane2():
 
 ####################################################################
 #DATA HANDLING I/O
-wildfireFile = open("data/wildfire.txt")
+wildfireFile = open("data/safeData/wildfire.txt")
 wildfireData = wildfireFile.readlines()
 wildfireData.append("ADD NEW")
 wildfireFile.close()
-stormFile = open("data/storm.txt")
+stormFile = open("data/safeData/storm.txt")
 stormData = stormFile.readlines()
 stormData.append("ADD NEW")
 stormFile.close()
-earthquakeFile = open("data/earthquake.txt")
+earthquakeFile = open("data/safeData/earthquake.txt")
 earthquakeData = earthquakeFile.readlines()
 earthquakeData.append("ADD NEW")
 earthquakeFile.close()
-floodFile = open("data/flood.txt")
+floodFile = open("data/safeData/flood.txt")
 floodData = floodFile.readlines()
 floodData.append("ADD NEW")
 floodFile.close()
-avalancheFile = open("data/avalanche.txt")
+avalancheFile = open("data/safeData/avalanche.txt")
 avalancheData = avalancheFile.readlines()
 avalancheData.append("ADD NEW")
 avalancheFile.close()
-hurricaneFile = open("data/hurricane.txt")
+hurricaneFile = open("data/safeData/hurricane.txt")
 hurricaneData = hurricaneFile.readlines()
 hurricaneData.append("ADD NEW")
 hurricaneFile.close()
 
-missionFile = open("data/mission.txt")
+missionFile = open("data/appData/mission.txt")
 missionData = missionFile.readlines()
 missionFile.close()
 
@@ -463,23 +514,49 @@ safeInstructions = ralewayRegular24.render("Select the relevant disaster to init
 safeInstructions2 = ralewayMedium36.render("B-Safe Helper Audio Activated.", True, RED)
 safeInstructions3 = ralewayRegular24.render("Contact Local Emergency Services for more info.", True, GREY)
 #-------------------------------------------------------------------
-informedHeadlines = open("data/informed.txt")
+informedHeadlines = open("data/appData/informed.txt")
 informedData = informedHeadlines.readlines()
 informedHeadlines.close()
-informedSrc = open("data/informedPics.txt")
+informedSrc = open("data/appData/informedPics.txt")
 informedImages = informedSrc.readlines()
 informedSrc.close()
 informedPics = []
-temp = transform.scale(image.load("images/news/okanagan.jpg"), (98,98))
-temp2 = transform.scale(image.load("images/news/edmontonStorm.jpg"), (98,98))
-temp3 = transform.scale(image.load("images/news/calgaryStorm.jpg"), (98,98))
-temp4 = transform.scale(image.load("images/news/summerWeather.jpeg"), (98,98))
-informedPics.append(temp)
-informedPics.append(temp2)
-informedPics.append(temp3)
-informedPics.append(temp4)
+informedTemp = transform.scale(image.load("images/news/okanagan.jpg"), (97,97))
+informedTemp2 = transform.scale(image.load("images/news/edmontonStorm.jpg"), (97,97))
+informedTemp3 = transform.scale(image.load("images/news/calgaryStorm.jpg"), (97,97))
+informedTemp4 = transform.scale(image.load("images/news/summerWeather.jpeg"), (97,97))
+informedPics.append(informedTemp)
+informedPics.append(informedTemp2)
+informedPics.append(informedTemp3)
+informedPics.append(informedTemp4)
 updateText = ralewayRegular24.render("Updated " + informedData[0], True, GREY)
-
+#-------------------------------------------------------------------
+preparedHeadlines = open("data/appData/prepared.txt")
+preparedData = preparedHeadlines.readlines()
+preparedHeadlines.close()
+preparedSrc = open("data/appData/preparedPics.txt")
+preparedImages = preparedSrc.readlines()
+preparedSrc.close()
+preparedPics = []
+preparedTemp = transform.scale(image.load("images/store/fireproofing.jpg"), (97,97))
+preparedTemp2 = transform.scale(image.load("images/store/firstaid.jpg"), (97,97))
+preparedTemp3 = transform.scale(image.load("images/store/survivalKit.jpeg"), (97,97))
+preparedTemp4 = transform.scale(image.load("images/store/hiking.jpg"), (97,97))
+preparedPics.append(preparedTemp)
+preparedPics.append(preparedTemp2)
+preparedPics.append(preparedTemp3)
+preparedPics.append(preparedTemp4)
+updateText2 = ralewayRegular24.render("Updated " + preparedData[0], True, GREY)
+#-------------------------------------------------------------------
+#-------------------------------------------------------------------
+profileHeadlines = open("data/appData/profile.txt")
+profileData = profileHeadlines.readlines()
+profileHeadlines.close()
+profilePic = transform.scale(image.load("images/profile/lye.png"),(150,150))
+mostText = ralewayRegular24.render("Your Disaster Watchlist", True, BLACK)
+achievementText = ralewayRegular24.render("Your Achievments", True, BLACK)
+prepperPic = transform.scale(image.load("images/profile/prepper.png"), (100,100))
+runnerPic = transform.scale(image.load("images/profile/runner.png"), (100,100))
 
 
 ####################################################################
@@ -616,7 +693,7 @@ while running:
             drawThanks()
             if enter == True:
                 hoes = "false"
-                screenPosition = "start"
+                screenPosition = "profile"
         display.flip()
 #########################################################################
 #USAGE LOOP
