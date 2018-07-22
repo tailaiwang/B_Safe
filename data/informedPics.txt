@@ -1,4 +1,0 @@
-images/news/okanagan.jpg
-images/news/edmontonStorm.jpg
-images/news/calgaryStorm.jpg
-images/news/summerWeather.jpeg
