@@ -233,6 +233,29 @@ def drawBsafe():
 
 def drawBresilient():
     screen.blit(resilientText, (screenWidth/2 - resilientText.get_width()/2, 75/2 - resilientText.get_height()/2))
+    screen.blit(subtitleText, (screenWidth/2 - subtitleText.get_width()/2, 85))
+    sampleTemp= ralewayRegular12.render("THIS IS SAMPLE TEXT. A description of the person's services would go here.", True, GREY)
+    count = 0;
+    for i in resilientData:
+        temp = ralewayRegular24.render(i, True, BLACK)
+        temp2 = ralewayRegular24.render("Calgary, AB", True, GREY)
+        temp3 = ralewayRegular24.render("Cochrane, AB", True, GREY)
+        temp4 = ralewayRegular24.render("Carseland, AB", True, GREY)
+        draw.rect(screen, BLACK, (0, screenHeight/5 + count * 100, screenWidth, 100), 2)
+        screen.blit(temp, (10, screenHeight/5 + count * 100))
+        screen.blit(callPic, (screenWidth - screenWidth/4, screenHeight/5 + count * 100 + 40))
+        screen.blit(sampleTemp, (10, screenHeight/5 + count * 100 + 80))
+        if (i == resilientData[0]):
+            screen.blit(temp3, (10, screenHeight/5 + count * 100 +40))
+        elif (i == resilientData[2]):
+            screen.blit(temp4, (10, screenHeight/5 + count * 100 +40))
+        else:
+            screen.blit(temp2, (10, screenHeight/5 + count * 100 +40))
+        count += 1
+    count = 0
+    for pic in resilientPics:
+        screen.blit(pic, (screenWidth-98, screenHeight/5 + count*100 + 2))
+        count += 1
     draw.rect(screen, RED, resilientRect, 2)
 
 def drawProfile():
@@ -240,7 +263,6 @@ def drawProfile():
     screen.blit(profilePic, (screenWidth/2 - profilePic.get_width()/2, 100))
     count = 0
     for i in range (3):
-        print(i)
         if (i == 0):
             temp = ralewayMedium36.render(profileData[i], True, BLACK)
             screen.blit(temp, (screenWidth/2 - temp.get_width()/2, 250 + count*40))
@@ -548,6 +570,19 @@ preparedPics.append(preparedTemp3)
 preparedPics.append(preparedTemp4)
 updateText2 = ralewayRegular24.render("Updated " + preparedData[0], True, GREY)
 #-------------------------------------------------------------------
+resilientHeadlines = open("data/appData/resilient.txt")
+resilientData = resilientHeadlines.readlines()
+resilientHeadlines.close()
+resilientSrc = open("data/appData/resilientPics.txt")
+resilientImages = resilientSrc.readlines()
+resilientSrc.close()
+resilientPics = []
+resilientPics.append(transform.scale(image.load("images/network/rita.jpg"), (97,97)))
+resilientPics.append(transform.scale(image.load("images/network/george.jpg"), (97,97)))
+resilientPics.append(transform.scale(image.load("images/network/alex.jpg"), (97,97)))
+resilientPics.append(transform.scale(image.load("images/network/adam.jpg"), (97,97)))             
+subtitleText = ralewayRegular24.render("Professional help near you.", True, GREY)
+callPic = transform.scale(image.load("images/network/phone.png"), (50,50))
 #-------------------------------------------------------------------
 profileHeadlines = open("data/appData/profile.txt")
 profileData = profileHeadlines.readlines()
