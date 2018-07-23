@@ -1,10 +1,6 @@
 #*********URGENT**********
-#-------------------------
-#FILE I/O WITH TXT FILES |
-#POSSIBLE UI TYPING???   |
-#SEARCH FUNCTIONS        |
+#------------------------|
 #SETTINGS MENU           |
-#ALERT MENU              |
 #-------------------------
 #B Safe
 #B House Design
@@ -296,7 +292,7 @@ def drawSettings():
     screen.blit(settingsText, (screenWidth/2 - settingsText.get_width()/2, 75/2 - profileText.get_height()/2))
     draw.rect(screen, RED, settingsRect, 2)
 
-def drawFire2():
+def drawFire2(paused):
     screen.blit(wildfireText, (screenWidth/2 - wildfireText.get_width()/2, 0))
     screen.blit(safeInstructions2, (screenWidth/2 - safeInstructions2.get_width()/2, screenHeight/6))
     screen.blit(safeInstructions3, (screenWidth/2 - safeInstructions3.get_width()/2, screenHeight/6 + 40))
@@ -307,9 +303,18 @@ def drawFire2():
             temp = ralewayRegular24.render(str(count + 1) + ". " + data, True, BLACK)
             screen.blit(temp, (0,200 + count*25))
             count += 1
+    draw.rect(screen, BLACK, playRect, 2)
+    draw.rect(screen, BLACK, nextRect, 2)
+    draw.rect(screen, BLACK, lastRect, 2)
+    if paused:
+        screen.blit(play, (playRect[0], playRect[1]))
+    else:
+        screen.blit(pause, (playRect[0], playRect[1]))
+    screen.blit(nextTrack, (nextRect[0], nextRect[1]))
+    screen.blit(lastTrack, (lastRect[0], lastRect[1]))
     
 
-def drawStorm2():
+def drawStorm2(paused):
     screen.blit(stormText, (screenWidth/2 - stormText.get_width()/2, 0))
     screen.blit(safeInstructions2, (screenWidth/2 - safeInstructions2.get_width()/2, screenHeight/6))
     screen.blit(safeInstructions3, (screenWidth/2 - safeInstructions3.get_width()/2, screenHeight/6 + 40))
@@ -320,9 +325,14 @@ def drawStorm2():
             temp = ralewayRegular24.render(str(count + 1) + ". " + data, True, BLACK) 
             screen.blit(temp, (0,200 + count*25))
             count += 1
-        
+    if paused:
+        screen.blit(play, (playRect[0], playRect[1]))
+    else:
+        screen.blit(pause, (playRect[0], playRect[1]))
+    draw.rect(screen, BLACK, nextRect, 2)
+    draw.rect(screen, BLACK, lastRect, 2)  
 
-def drawearthquake2():
+def drawearthquake2(paused):
     screen.blit(earthquakeText, (screenWidth/2 - earthquakeText.get_width()/2, 0))
     screen.blit(safeInstructions2, (screenWidth/2 - safeInstructions2.get_width()/2, screenHeight/6))
     screen.blit(safeInstructions3, (screenWidth/2 - safeInstructions3.get_width()/2, screenHeight/6 + 40))
@@ -333,8 +343,14 @@ def drawearthquake2():
             temp = ralewayRegular24.render(str(count + 1) + ". " + data, True, BLACK)
             screen.blit(temp, (0,200 + count*25))
             count += 1
-
-def drawFlood2():
+    if paused:
+        screen.blit(play, (playRect[0], playRect[1]))
+    else:
+        screen.blit(pause, (playRect[0], playRect[1]))
+    draw.rect(screen, BLACK, nextRect, 2)
+    draw.rect(screen, BLACK, lastRect, 2)
+    
+def drawFlood2(paused):
     screen.blit(floodText, (screenWidth/2 - floodText.get_width()/2, 0))
     screen.blit(safeInstructions2, (screenWidth/2 - safeInstructions2.get_width()/2, screenHeight/6))
     screen.blit(safeInstructions3, (screenWidth/2 - safeInstructions3.get_width()/2, screenHeight/6 + 40))
@@ -344,8 +360,14 @@ def drawFlood2():
             temp = ralewayRegular24.render(str(count + 1) + ". " + data, True, BLACK)
             screen.blit(temp, (0,200 + count*25))
             count += 1
+    if paused:
+        screen.blit(play, (playRect[0], playRect[1]))
+    else:
+        screen.blit(pause, (playRect[0], playRect[1]))
+    draw.rect(screen, BLACK, nextRect, 2)
+    draw.rect(screen, BLACK, lastRect, 2)
 
-def drawAvalanche2():
+def drawAvalanche2(paused):
     screen.blit(avalancheText, (screenWidth/2 - avalancheText.get_width()/2, 0))
     screen.blit(safeInstructions2, (screenWidth/2 - safeInstructions2.get_width()/2, screenHeight/6))
     screen.blit(safeInstructions3, (screenWidth/2 - safeInstructions3.get_width()/2, screenHeight/6 + 40))
@@ -356,8 +378,14 @@ def drawAvalanche2():
             temp = ralewayRegular24.render(str(count + 1) + ". " + data, True, BLACK)
             screen.blit(temp, (0,200 + count*25))
             count += 1
-
-def drawHurricane2():
+    if paused:
+        screen.blit(play, (playRect[0], playRect[1]))
+    else:
+        screen.blit(pause, (playRect[0], playRect[1]))
+    draw.rect(screen, BLACK, nextRect, 2)
+    draw.rect(screen, BLACK, lastRect, 2)
+    
+def drawHurricane2(paused):
     screen.blit(hurricaneText, (screenWidth/2 - hurricaneText.get_width()/2, 0))
     screen.blit(safeInstructions2, (screenWidth/2 - safeInstructions2.get_width()/2, screenHeight/6))
     screen.blit(safeInstructions3, (screenWidth/2 - safeInstructions3.get_width()/2, screenHeight/6 + 40))
@@ -368,7 +396,12 @@ def drawHurricane2():
             temp = ralewayRegular24.render(str(count + 1) + ". " + data, True, BLACK)
             screen.blit(temp, (0,200 + count*25))
             count += 1
-
+    if paused:
+        screen.blit(play, (playRect[0], playRect[1]))
+    else:
+        screen.blit(pause, (playRect[0], playRect[1]))
+    draw.rect(screen, BLACK, nextRect, 2)
+    draw.rect(screen, BLACK, lastRect, 2)
 ####################################################################
 #DATA HANDLING I/O
 wildfireFile = open("data/safeData/wildfire.txt")
@@ -447,7 +480,6 @@ display.flip()
 
 running = True
 screenPosition = "start"
-time.wait(1000)
 #####################################################################
 #FONTS
 font.init()
@@ -592,8 +624,40 @@ mostText = ralewayRegular24.render("Your Disaster Watchlist", True, BLACK)
 achievementText = ralewayRegular24.render("Your Achievments", True, BLACK)
 prepperPic = transform.scale(image.load("images/profile/prepper.png"), (100,100))
 runnerPic = transform.scale(image.load("images/profile/runner.png"), (100,100))
+#-------------------------------------------------------------------
+file1 = "audio/recording1.mp3"
+file2 = "audio/recording2.mp3"
+file3 = "audio/recording3.mp3"
+file4 = "audio/recording4.mp3"
+file5 = "audio/recording5.mp3"
+file6 = "audio/recording6.mp3"
+file7 = "audio/recording7.mp3"
+file8 = "audio/recording8.mp3"
+file9 = "audio/recording9.mp3"
+file10 = "audio/recording10.mp3"
 
-
+audio=[]
+audio.append(file1)
+audio.append(file2)
+audio.append(file3)
+audio.append(file4)
+audio.append(file5)
+audio.append(file6)
+audio.append(file7)
+audio.append(file8)
+audio.append(file9)
+END_MUSIC_EVENT = pygame.USEREVENT+0 #loops music
+pygame.mixer.music.set_endevent(END_MUSIC_EVENT)
+#-------------------------------------------------------------------
+play = transform.scale(image.load("images/pause1.png"),(75,75))
+pause = transform.scale(image.load("images/pause2.png"), (75,75))
+nextTrack = transform.scale(image.load("images/next.png"), (75,75))
+lastTrack = transform.scale(image.load("images/previous.png"), (75,75))
+playRect = Rect(screenWidth/2 - 75/2, screenHeight - screenHeight/4, 75, 75)
+nextRect = Rect(screenWidth/2 - 75/2 + 100, screenHeight - screenHeight/4, 75, 75)
+lastRect = Rect(screenWidth/2 - 75/2 - 100, screenHeight - screenHeight/4, 75, 75)
+playing = True
+cSong = 0
 ####################################################################
 #REGULAR SEQUENCE RECTS
 barRects = []
@@ -822,21 +886,45 @@ while running:
                         if (i == disasterRects[0]):
                             screenPosition = "wildfire"
                             print("Fire")
+                            pygame.mixer.music.load(audio[0])
+                            pygame.mixer.music.play()
+                            playing = True
+                            cSong = 0
                         elif (i == disasterRects[1]):
                             screenPosition = "severe storm"
                             print("Storm")
+                            pygame.mixer.music.load(audio[0])
+                            pygame.mixer.music.play()
+                            playing = True
+                            cSong = 0
                         elif (i == disasterRects[2]):
                             screenPosition = "earthquake"
                             print("earthquake")
+                            pygame.mixer.music.load(audio[0])
+                            pygame.mixer.music.play()
+                            playing = True
+                            cSong = 0
                         elif (i == disasterRects[3]):
                             screenPosition = "flood"
                             print("Flood")
+                            pygame.mixer.music.load(audio[1])
+                            pygame.mixer.music.play()
+                            playing = True
+                            cSong = 1
                         elif (i == disasterRects[4]):
                             screenPosition = "avalanche"
                             print("Avalanche")
+                            pygame.mixer.music.load(audio[0])
+                            pygame.mixer.music.play()
+                            cSong = 0
+                            playing = True
                         elif (i == disasterRects[5]):
                             screenPosition = "hurricane"
                             print("Hurricane")
+                            pygame.mixer.music.load(audio[0])
+                            pygame.mixer.music.play()
+                            playing = True
+                            cSong = 0
 
             if screenPosition == "b_resilient":
                 screenFill(WHITE)
@@ -856,7 +944,7 @@ while running:
                     screenPosition = "start"
                 if (settingsRect.collidepoint(mx,my) and (leftClick)):
                     screenPosition = "settings"
-
+                
             if screenPosition == "profile":
                 screenFill(WHITE)
                 drawBar()
@@ -898,7 +986,7 @@ while running:
             if screenPosition == "wildfire":
                 screenFill(WHITE)
                 drawBar()
-                drawFire2()
+                drawFire2(playing)
                 if (informedRect.collidepoint(mx,my) and (leftClick)):
                     screenPosition = "b_informed"
                 if (preparedRect.collidepoint(mx,my) and (leftClick)):
@@ -913,12 +1001,30 @@ while running:
                     screenPosition = "start"
                 if (settingsRect.collidepoint(mx,my) and (leftClick)):
                     screenPosition = "settings"
-
+                if (playRect.collidepoint(mx,my) and (leftClick)):
+                    if playing:
+                        playing = False
+                        pygame.mixer.music.pause()
+                    else:
+                        playing = True
+                        pygame.mixer.music.unpause()
+                if (nextRect.collidepoint(mx,my) and (leftClick)):
+                    if (cSong != 0 and audio[cSong] != audio[-1]):
+                        cSong += 1
+                    elif (cSong != 0):
+                        cSong = 1
+                    pygame.mixer.music.load(audio[cSong])
+                if (lastRect.collidepoint(mx,my) and (leftClick)):
+                    if (cSong != 0 and audio[cSong] != audio[1]):
+                        cSong -= 1
+                    elif (cSong != 0):
+                        cSong = len(audio) - 1
+                    pygame.mixer.music.load(audio[cSong])
                 
             if screenPosition == "severe storm":
                 screenFill(WHITE)
                 drawBar()
-                drawStorm2()
+                drawStorm2(playing)
                 if (informedRect.collidepoint(mx,my) and (leftClick)):
                     screenPosition = "b_informed"
                 if (preparedRect.collidepoint(mx,my) and (leftClick)):
@@ -933,11 +1039,30 @@ while running:
                     screenPosition = "start"
                 if (settingsRect.collidepoint(mx,my) and (leftClick)):
                     screenPosition = "settings"
+                if (playRect.collidepoint(mx,my) and (leftClick)):
+                    if playing:
+                        playing = False
+                        pygame.mixer.music.pause()
+                    else:
+                        playing = True
+                        pygame.mixer.music.unpause()
+                if (nextRect.collidepoint(mx,my) and (leftClick)):
+                    if (cSong != 0 and audio[cSong] != audio[-1]):
+                        cSong += 1
+                    elif (cSong != 0):
+                        cSong = 1
+                    pygame.mixer.music.load(audio[cSong])
+                if (lastRect.collidepoint(mx,my) and (leftClick)):
+                    if (cSong != 0 and audio[cSong] != audio[1]):
+                        cSong -= 1
+                    elif (cSong != 0):
+                        cSong = len(audio) - 1
+                    pygame.mixer.music.load(audio[cSong])
                
             if screenPosition == "earthquake":
                 screenFill(WHITE)
                 drawBar()
-                drawearthquake2()
+                drawearthquake2(playing)
                 if (informedRect.collidepoint(mx,my) and (leftClick)):
                     screenPosition = "b_informed"
                 if (preparedRect.collidepoint(mx,my) and (leftClick)):
@@ -952,11 +1077,30 @@ while running:
                     screenPosition = "start"
                 if (settingsRect.collidepoint(mx,my) and (leftClick)):
                     screenPosition = "settings"
+                if (playRect.collidepoint(mx,my) and (leftClick)):
+                    if playing:
+                        playing = False
+                        pygame.mixer.music.pause()
+                    else:
+                        playing = True
+                        pygame.mixer.music.unpause()
+                if (nextRect.collidepoint(mx,my) and (leftClick)):
+                    if (cSong != 0 and audio[cSong] != audio[-1]):
+                        cSong += 1
+                    elif (cSong != 0):
+                        cSong = 1
+                    pygame.mixer.music.load(audio[cSong])
+                if (lastRect.collidepoint(mx,my) and (leftClick)):
+                    if (cSong != 0 and audio[cSong] != audio[1]):
+                        cSong -= 1
+                    elif (cSong != 0):
+                        cSong = len(audio) - 1
+                    pygame.mixer.music.load(audio[cSong])
                     
             if screenPosition == "flood":
                 screenFill(WHITE)
                 drawBar()
-                drawFlood2()
+                drawFlood2(playing)
                 if (informedRect.collidepoint(mx,my) and (leftClick)):
                     screenPosition = "b_informed"
                 if (preparedRect.collidepoint(mx,my) and (leftClick)):
@@ -971,11 +1115,30 @@ while running:
                     screenPosition = "start"
                 if (settingsRect.collidepoint(mx,my) and (leftClick)):
                     screenPosition = "settings"
+                if (playRect.collidepoint(mx,my) and (leftClick)):
+                    if playing:
+                        playing = False
+                        pygame.mixer.music.pause()
+                    else:
+                        playing = True
+                        pygame.mixer.music.unpause()
+                if (nextRect.collidepoint(mx,my) and (leftClick)):
+                    if (cSong != 0 and audio[cSong] != audio[-1]):
+                        cSong += 1
+                    elif (cSong != 0):
+                        cSong = 1
+                    pygame.mixer.music.load(audio[cSong])
+                if (lastRect.collidepoint(mx,my) and (leftClick)):
+                    if (cSong != 0 and audio[cSong] != audio[1]):
+                        cSong -= 1
+                    elif (cSong != 0):
+                        cSong = len(audio) - 1
+                    pygame.mixer.music.load(audio[cSong])
                     
             if screenPosition == "avalanche":
                 screenFill(WHITE)
                 drawBar()
-                drawAvalanche2()
+                drawAvalanche2(playing)
                 if (informedRect.collidepoint(mx,my) and (leftClick)):
                     screenPosition = "b_informed"
                 if (preparedRect.collidepoint(mx,my) and (leftClick)):
@@ -990,11 +1153,30 @@ while running:
                     screenPosition = "start"
                 if (settingsRect.collidepoint(mx,my) and (leftClick)):
                     screenPosition = "settings"
+                if (playRect.collidepoint(mx,my) and (leftClick)):
+                    if playing:
+                        playing = False
+                        pygame.mixer.music.pause()
+                    else:
+                        playing = True
+                        pygame.mixer.music.unpause()
+                if (nextRect.collidepoint(mx,my) and (leftClick)):
+                    if (cSong != 0 and audio[cSong] != audio[-1]):
+                        cSong += 1
+                    elif (cSong != 0):
+                        cSong = 1
+                    pygame.mixer.music.load(audio[cSong])
+                if (lastRect.collidepoint(mx,my) and (leftClick)):
+                    if (cSong != 0 and audio[cSong] != audio[1]):
+                        cSong -= 1
+                    elif (cSong != 0):
+                        cSong = len(audio) - 1
+                    pygame.mixer.music.load(audio[cSong])
                     
             if screenPosition == "hurricane":
                 screenFill(WHITE)
                 drawBar()
-                drawHurricane2()
+                drawHurricane2(playing)
                 if (informedRect.collidepoint(mx,my) and (leftClick)):
                     screenPosition = "b_informed"
                 if (preparedRect.collidepoint(mx,my) and (leftClick)):
@@ -1009,6 +1191,25 @@ while running:
                     screenPosition = "start"
                 if (settingsRect.collidepoint(mx,my) and (leftClick)):
                     screenPosition = "settings"
+                if (playRect.collidepoint(mx,my) and (leftClick)):
+                    if playing:
+                        playing = False
+                        pygame.mixer.music.pause()
+                    else:
+                        playing = True
+                        pygame.mixer.music.unpause()
+                if (nextRect.collidepoint(mx,my) and (leftClick)):
+                    if (cSong != 0 and audio[cSong] != audio[-1]):
+                        cSong += 1
+                    elif (cSong != 0):
+                        cSong = 1
+                    pygame.mixer.music.load(audio[cSong])
+                if (lastRect.collidepoint(mx,my) and (leftClick)):
+                    if (cSong != 0 and audio[cSong] != audio[1]):
+                        cSong -= 1
+                    elif (cSong != 0):
+                        cSong = len(audio) - 1
+                    pygame.mixer.music.load(audio[cSong])
             
             
 #outfile = open("setup.txt", "w")
